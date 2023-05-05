@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Edit Blog Post...{% endblock %}
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %} 
+
+        <h1>Update Post...!!!</h1>
+        <br></br>
+
+        <div class="form-group">
+            <form method="POST">          
+                {% csrf_token %}
+                {{ form.media }}       
+                {{ form.as_p }}
+                <button class="btn btn-secondary">Update
+                </button>         
+        </div>
+    {% else %}
+            You are not allowed here! (and you know it...)
+    {% endif %}
+{% else %}
+
+You are not allowed here! (and you know it...)
+
+{% endif %}
+
+
+{% endblock %}
+
+"""Eğer sitenize dişaridan bir saldiri yapilmak istenirse csrf_token ile
+üretilen ve çerezde saklanan bu rastgele değer karşilaştirilir ve
+sitenize dişaridan müdahaleye izin vermez.
+""""
